@@ -26,8 +26,31 @@ def part1(input_file):
 
     print(valid_password)
 
+def part2(input_file):
+    with open(input_file) as f:
+        lines = f.read().split("\n")
+    lines = [x for x in lines if x != ""]
+
+
+    valid_password = 0
+    for x in lines:
+        min_max = x.split(" ")[0]
+        _min = int(min_max.split("-")[0]) - 1
+        _max = int(min_max.split("-")[1]) - 1
+
+        letter = x.split(" ")[1][0]
+
+        password = list(x.split(" ")[2])
+       
+        password_chars = [password[_min]] + [password[_max]]
+        
+        if password_chars.count(letter) == 1:
+            valid_password += 1
+
+    print(valid_password)
 
 if __name__ == "__main__":
     part1("inputs/day_02.txt")
+    part2("inputs/day_02.txt")
 
 
